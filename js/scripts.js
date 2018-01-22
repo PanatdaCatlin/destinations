@@ -25,14 +25,19 @@ $(document).ready(function() {
 
   var displayNewDestination = function() {
     var lastObject = destinationsArray[destinationsArray.length - 1];
-    console.log(lastObject);
 
-    $("div .destinationName").text(lastObject.location);
-    $("div img").attr("src", lastObject.imageURL)
-    $("div .landmarks").text(lastObject.landmarks);
-    $("div .season").text(lastObject.season);
-    $("div .notes").text(lastObject.info);
+    $("#destinationsContainer").append('<div class="col-md-4"></div>');
 
+    $("#destinationsContainer .col-md-4:last-child").append('<h2 class="destinationName clickToExpand">' + lastObject.location + '</h2>');
+    $("#destinationsContainer .col-md-4:last-child").append('<img class="destinationImage">')
+    $("#destinationsContainer .col-md-4:last-child img").attr("src", lastObject.imageURL)
+    $("#destinationsContainer .col-md-4:last-child").append('<p class="landmarks">' + lastObject.landmarks + '</p>');
+    $("#destinationsContainer .col-md-4:last-child").append('<p class="season">' + lastObject.season + '</p>');
+    $("#destinationsContainer .col-md-4:last-child").append('<p class="notes">' + lastObject.info + '</p>');
+
+    $(".col-md-4:last-child > .clickToExpand").click(function() {
+      $(this).parent().find('img, p').toggle();
+    });
   };
 
   $("#destinationsForm").submit(function(event) {
@@ -44,4 +49,4 @@ $(document).ready(function() {
 
 
   });
-});
+  });
